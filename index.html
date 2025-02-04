@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walentynka</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pixelify+Sans">
+</head>
+<body>
+<div class="starting-scene" id="startingScene">
+  <h2 class = "animacja-fast" id="text">Hejka słońce</h2>
+  <h2 class = "animacja" id="text1">Stworzyłem tą stronę żeby się zapytać ciebie o coś</h2>
+  <h2 class = "animacja" id="text2">BARDZO ważnego w stylu prawdziwego informatyka</h2>
+</div>
+
+<div class="image-scene" id="imageScene" style="display: none;">
+  <img src="https://cdn.discordapp.com/attachments/500358886436372495/1336146360919003167/Messenger_creation_E7FCE0B6-278B-4585-BEBD-49815A3B1F2D.jpg?ex=67a2bec4&is=67a16d44&hm=b337586abbc475f04ba3856d06c790186da622cc73287c0bba1ccb358a15d089&" alt="Cos sie rozwalilo" class="scene-image">
+</div>
+
+<div class="container" id = "container">
+  <h1>Czy zostaniesz moją Walentynką?</h1>
+  <div class="buttons">
+    <button id="yesBtn">TAK</button>
+    <button id="noBtn">NIE</button>
+  </div>
+  <div id="gifContainer"></div>
+  <div id="gifContainerNo"></div>
+  <div id="textgif"></div>
+</div>
+
+<script>
+  const startingScene = document.getElementById('startingScene');
+  const text = document.getElementById('text');
+  const text1 = document.getElementById('text1');
+  const text2 = document.getElementById('text2');
+  const imageScene = document.getElementById('imageScene');
+  const container = document.getElementById('container');
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const gifContainer = document.getElementById('gifContainer');
+  const gifContainerNo = document.getElementById('gifContainerNo');
+  const textgif = document.getElementById('textgif');
+
+  const noGifs = [
+    'https://media1.tenor.com/m/V_z072YdErsAAAAC/rat-cry-mouse-cutie.gif',
+    'https://media1.tenor.com/m/xdzR9MA74UQAAAAd/sad-crying-kitty-sad-crying-kitten.gif',
+    'https://media1.tenor.com/m/HhXrkoNs09UAAAAC/vegeta-vegeta-rain.gif',
+    'https://media1.tenor.com/m/kjqof9l6gk8AAAAC/pikachu-sad.gif',
+    'https://media1.tenor.com/m/JXIf0OJyVtQAAAAd/yellow-boy-sad-yellow-boy.gif',
+    'https://media1.tenor.com/m/JMsdE_qWczUAAAAC/eyes-puppy-eyes.gif',
+    'https://media1.tenor.com/m/YO15HvbSVDMAAAAC/sad-pou-depression.gif',
+    'https://media1.tenor.com/m/aGgnqxZUzeUAAAAC/sad.gif'
+  ];
+  let currentGifIndex = 0;
+
+  container.style.display = 'none';
+  imageScene.style.display = 'none';
+  text1.style.display = 'none';
+  text2.style.display = 'none';
+
+  setTimeout(() => {
+    text.style.display = 'none';
+    text1.style.display = 'block';
+    setTimeout(() => {
+      text1.style.display = 'none';
+      text2.style.display = 'block';
+        setTimeout(() => {
+          startingScene.style.display = 'none';
+          container.style.display = 'block';
+        }, 6000);
+    }, 5000);
+  }, 2500);
+
+  yesBtn.addEventListener('click', () => {
+    gifContainer.innerHTML = '';
+    const gif = document.createElement('img');
+    gif.src = 'https://media1.tenor.com/m/etm5cZ9TJMUAAAAd/%D1%8F%D0%BF%D1%96-yappi.gif';
+    gif.alt = 'Cos sie rozwalilo';
+    gif.classList.add('valentine-gif');
+    gifContainer.appendChild(gif);
+    gifContainer.style.display = 'block';
+    noBtn.style.display = 'none';
+    gifContainerNo.style.display = 'none';
+    textgif.style.display = 'none';
+  });
+
+  noBtn.addEventListener('click', () => {
+    gifContainerNo.innerHTML = '';
+    const gif = document.createElement('img');
+    gif.src = noGifs[currentGifIndex];
+    gif.alt = 'Cos sie rozwalilo';
+    gif.classList.add('valentine-gif');
+    gifContainerNo.appendChild(gif);
+
+    currentGifIndex = currentGifIndex + 1;
+    if (currentGifIndex === 8) {
+      textgif.textContent = 'Nie no już bez przesady...';
+      gifContainerNo.style.display = 'none';
+    }
+    else if (currentGifIndex === 11) {
+      textgif.textContent = 'AHA...';
+      noBtn.style.display = 'none';
+    }
+  });
+
+  noBtn.addEventListener('click', () => {
+    const randomX = Math.floor(Math.random() * (window.innerWidth - noBtn.offsetWidth));
+    const randomY = Math.floor(Math.random() * (window.innerHeight - noBtn.offsetHeight));
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+  });
+</script>
+</body>
+</html>
